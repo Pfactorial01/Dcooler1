@@ -34,6 +34,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'Project_Flow',
+    'Project_Flow.Personnel',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
