@@ -1,0 +1,14 @@
+{% extends "users/layout.html" %}
+
+{% block body %}
+
+<h1> Demo User login</h1>
+
+<a href ="{% url 'Admin'%}"> <h2> Admin </h2> </a>
+<a href ="{% url 'Admin1'%}"> <h2> Project Manager </h2> </a>
+<a href ="{% url 'Admin2'%}"> <h2> Team Leader </h2> </a>
+
+<a href ="{% url 'logout'%}"> Log Out</a>
+
+
+{% endblock body %}   
