@@ -33,13 +33,14 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [     
+INSTALLED_APPS = [   
+    'whitenoise.runserver_nostatic',
+    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     'Project_Flow',
 ]
 
@@ -125,21 +126,7 @@ USE_TZ = True
 from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
 
 
-class NoSourceMapsStorage(ManifestStaticFilesStorage):
-    patterns = (
-        (
-            "*.css",
-            (
-                "(?P<matched>url\\(['\"]{0,1}\\s*(?P<url>.*?)[\"']{0,1}\\))",
-                (
-                    "(?P<matched>@import\\s*[\"']\\s*(?P<url>.*?)[\"'])",
-                    '@import url("%(url)s")',
-                ),
-            ),
-        ),
-    )
 
-STATICFILES_STORAGE = 'NoSourceMapsStorage'
 
 STATIC_URL = '/static/'
 
