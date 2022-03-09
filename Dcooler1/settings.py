@@ -122,7 +122,24 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage' 
+from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
+
+
+class NoSourceMapsStorage(ManifestStaticFilesStorage):
+    patterns = (
+        (
+            "*.css",
+            (
+                "(?P<matched>url\\(['\"]{0,1}\\s*(?P<url>.*?)[\"']{0,1}\\))",
+                (
+                    "(?P<matched>@import\\s*[\"']\\s*(?P<url>.*?)[\"'])",
+                    '@import url("%(url)s")',
+                ),
+            ),
+        ),
+    )
+
+STATICFILES_STORAGE = 'NoSourceMapsStorage'
 
 STATIC_URL = '/static/'
 
