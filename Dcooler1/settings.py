@@ -136,10 +136,7 @@ class PatchedManifestStaticFilesStorage(storage.ManifestStaticFilesStorage):
             r"""(url\((?:['"]|%22|%27){0,1}\s*(.*?)(?:['"]|%22|%27){0,1}\))""",
             (r"""(@import\s*["']\s*(.*?)["'])""", """@import url("%s")"""),
         )),
-        ("*.js",(
-            r"""(url\((?:['"]|%22|%27){0,1}\s*(.*?)(?:['"]|%22|%27){0,1}\))""",
-            (r"""(@import\s*["']\s*(.*?)["'])""", """@import url("%s")"""),
-        )),
+        
     )
     
     
