@@ -28,6 +28,38 @@ class PersonnelManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+
+    
+
+
+        
+
+    def create_staffuser(self, email, password=None):
+        """
+        Creates and saves a staff user with the given email and password.
+        """
+        user = self.create_user(
+            email)
+        user.staff = True
+        user.set_password(password)
+        user.save(using=self._db)
+        return user
+
+
+    def create_superuser(self, email, password=None):
+        """
+        Creates and saves a superuser with the given email and password.
+        """
+        user = self.create_user(
+            email)
+        user.is_staff = True
+        user.is_superuser = True
+        user.set_password(password)
+        
+        user.save(using=self._db)
+        return user
+
+
 class Personnel(AbstractBaseUser):
     email = models.EmailField(verbose_name='Email address',max_length=254, unique=True)
     firstname = models.CharField(max_length=60)
@@ -101,49 +133,6 @@ class Project(models.Model):
 
 
 
-class PersonnelManager(BaseUserManager):
-    def create_user(self, email, password=None):
-        if not email:
-            raise ValueError('Users must have an email address')
-
-        user = self.model(
-            email=self.normalize_email(email)
-        )
-
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-
-    
-
-
-        
-
-    def create_staffuser(self, email, password=None):
-        """
-        Creates and saves a staff user with the given email and password.
-        """
-        user = self.create_user(
-            email)
-        user.staff = True
-        user.set_password(password)
-        user.save(using=self._db)
-        return user
-
-
-    def create_superuser(self, email, password=None):
-        """
-        Creates and saves a superuser with the given email and password.
-        """
-        user = self.create_user(
-            email)
-        user.is_staff = True
-        user.is_superuser = True
-        user.set_password(password)
-        
-        user.save(using=self._db)
-        return user
 
 
 
