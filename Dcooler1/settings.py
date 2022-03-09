@@ -125,7 +125,21 @@ USE_TZ = True
 
 from django.contrib.staticfiles.storage import ManifestStaticFilesStorage
 
+from django.contrib.staticfiles import storage
 
+class PatchedManifestStaticFilesStorage(storage.ManifestStaticFilesStorage):
+    """
+    Override the replacement patterns to match URL-encoded quotations.
+    """
+    patterns = (
+        ("*.css", (
+            r"""(url\((?:['"]|%22|%27){0,1}\s*(.*?)(?:['"]|%22|%27){0,1}\))""",
+            (r"""(@import\s*["']\s*(.*?)["'])""", """@import url("%s")"""),
+        )),
+    )
+    
+    
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.PatchedManifestStaticFilesStorage'
 
 
 STATIC_URL = '/static/'
