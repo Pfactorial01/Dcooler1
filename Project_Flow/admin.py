@@ -5,7 +5,7 @@ from django.contrib.auth.admin import UserAdmin
 
 # Register your models here.
 
-admin.site.register(User, UserAdmin)
+admin.site.register(UserAdmin)
 admin.site.register(Project)
 admin.site.register(Personnel)
 admin.site.register(Issue)
